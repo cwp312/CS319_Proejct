@@ -1,5 +1,5 @@
 # CS319_Project
-Binding of Isaac-style Game
+Binding of Isaac-style Game / Group 6
 
 Title: TBD
 
