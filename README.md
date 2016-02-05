@@ -1,4 +1,4 @@
-# CS319_Project
+# JCrawl
 Binding of Isaac-style Game / Group 6
 
 Title: TBD
