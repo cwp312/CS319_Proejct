@@ -1,7 +1,8 @@
 # JCrawl
 Binding of Isaac-style Game / Group 6
 
-Group 6
+
+
 Arda Yücel - ID: 21201698
 
 Cheol Woo Park - ID: 21300412
