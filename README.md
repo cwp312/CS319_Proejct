@@ -11,7 +11,6 @@ Fatih Taş - ID: 21300836
 
 Mustafa Fidan - ID: 21301255
 
-Title: TBD
 
 Top down game which will incorporate ideas from Classic Zelda/Binding of Isaac
 
