@@ -10,6 +10,8 @@ public class GraphicsAssembler {
 		//TODO(Someone) Finish implementation
 		RenderData data = new RenderData();
 		
+		data.setBackground(gfx.getTiles());
+		
 		return data;
 	}
 }

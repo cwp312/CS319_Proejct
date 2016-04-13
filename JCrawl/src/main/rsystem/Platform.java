@@ -23,7 +23,7 @@ public class Platform extends Canvas implements Runnable {
 	
 	private Thread gameThread;
 
-	private GameManager gm;
+	private GameManager gm = new GameManager();
 	
 	public void run() {
 		initializeGame();
@@ -63,6 +63,8 @@ public class Platform extends Canvas implements Runnable {
 	}
 	
 	public void render() {
+		RenderData rd = new RenderData();
+		
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
 			createBufferStrategy(3);
@@ -70,6 +72,15 @@ public class Platform extends Canvas implements Runnable {
 		}
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, width, height);
+		
+		// Render here
+		rd = gm.render();
+		for(int y = 0; y < rd.getTilesY(); y++) {
+			for(int x = 0; x < rd.getTilesX(); x++) {
+				g.drawImage(rd.getBackground()[x][y], x * rd.getSize(), y * rd.getSize(), rd.getSize(), rd.getSize(), null);
+			}
+		}
+		
 		bs.show();
 		g.dispose();
 	}

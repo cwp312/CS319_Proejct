@@ -1,15 +1,12 @@
 package main.gmm;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import main.CollisionGrid;
 import main.EntityGrid;
 import main.ExternalData;
 import main.GraphicGrid;
 import main.RenderData;
 import main.edm.FileManager;
+import main.lm.LevelManager;
 
 public class GameManager {
 	
@@ -23,15 +20,15 @@ public class GameManager {
 	private boolean keyPressed = false, levelChanged = false;
 	
 	private FileManager file = new FileManager();
+	private LevelManager level = new LevelManager();
 	
 	public GameManager() {
+		file.getFile("res/level.txt");
+		data = file.parseFile();
+		
 		initializeLevel();
 		initializeEntities();
 		initializeCollision();
-		
-		// DEBUG
-		file.getFile("res/level.txt");
-		data = file.parseFile();
 	}
 	
 	public void update() {
@@ -43,7 +40,7 @@ public class GameManager {
 	}
 	
 	public void initializeLevel() {
-		
+		gfx = level.initializeLevel(data);
 	}
 	
 	public void initializeEntities() {

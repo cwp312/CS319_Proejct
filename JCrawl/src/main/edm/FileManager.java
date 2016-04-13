@@ -50,7 +50,6 @@ public class FileManager {
 					entityFlag = true;
 				} else {
 					if (levelFlag) {
-						System.out.println("parselevel");
 						parseLevel(newLine);
 					}
 					if (entityFlag) {
@@ -60,12 +59,11 @@ public class FileManager {
 			}
 		}
 
-		System.out.println(data.getData().get(0));
-
 		return data;
 	}
 
 	private void parseLevel(String line) {
+		// Level needs to be 16 by 12
 		if (data.getTag().isEmpty()) {
 			data.getTag().add("level");
 		}
