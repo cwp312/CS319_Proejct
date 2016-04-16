@@ -10,6 +10,11 @@ import main.SpriteSheet;
 public class LevelManager {
 	GraphicGrid gfx = new GraphicGrid();
 	
+	/**
+	 * 
+	 * @param levelChanged
+	 * @return 
+	 */
 	public GraphicGrid update(boolean levelChanged) {
 		if(levelChanged) {
 			

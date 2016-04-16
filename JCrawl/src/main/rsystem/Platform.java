@@ -119,6 +119,10 @@ public class Platform extends Canvas implements Runnable {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param settings Contains setting data
+	 */
 	public void saveGameSettings(Map<String, String> settings) {
 		this.settings = settings;
 	}

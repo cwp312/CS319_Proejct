@@ -17,7 +17,8 @@ public class GameManager {
 	private ExternalData data;
 	private GraphicsAssembler ga = new GraphicsAssembler();
 	
-	private boolean keyPressed = false, levelChanged = false;
+	private boolean levelChanged = false;
+	private static boolean keyPressed[] = {false, false, false, false, false, false, false};
 	
 	private FileManager file = new FileManager();
 	private LevelManager level = new LevelManager();
@@ -49,5 +50,9 @@ public class GameManager {
 	
 	public void initializeCollision() {
 		
+	}
+	
+	public static void setKeyPressed(boolean[] keyPressed) {
+		GameManager.keyPressed = keyPressed;
 	}
 }
