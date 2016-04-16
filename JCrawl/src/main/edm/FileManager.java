@@ -17,7 +17,8 @@ public class FileManager {
 
 	/**
 	 * 
-	 * @param URL URL to the file to be read
+	 * @param URL
+	 *            URL to the file to be read
 	 */
 	public void getFile(String URL) {
 		try {
@@ -82,6 +83,8 @@ public class FileManager {
 	}
 
 	private void parseEntity(String line) {
+		dataPassCounter = 0;
+		
 		Scanner s = new Scanner(line);
 		s.useDelimiter(",");
 		while (s.hasNext()) {
@@ -92,7 +95,7 @@ public class FileManager {
 				parsePlayer(newLine);
 			}
 
-			if (newLine.equals("p_")) {
+			if (newLine.equals("p_") && player == false) {
 				data.getTag().add("Player");
 				player = true;
 			}
@@ -105,34 +108,30 @@ public class FileManager {
 			addToData(line);
 			dataIndice = data.getTag().lastIndexOf("Player");
 			dataPassCounter++;
-		} else if (dataPassCounter < 3) {
-			if (dataIndice == data.getData().size()) {
-				addToData(line);
-			} else {
-				concatToData(line, dataIndice);
-				if (dataPassCounter >= 3) {
-					dataPassCounter = 0;
-					player = false;
-					return;
-				}
+		} else if (dataPassCounter < 2) {
+			concatToData(line, dataIndice);
+			if (dataPassCounter >= 2) {
+				dataPassCounter = 0;
+				player = false;
+				return;
 			}
 			dataPassCounter++;
 		}
 	}
-	
+
 	/*
 	 * Adds new element to data array list of ExternalData
 	 */
 	private void addToData(String line) {
 		data.getData().add(line);
 	}
-	
+
 	/*
 	 * Concats a string to data array list element of ExternalData
 	 */
 	private void concatToData(String line, int dataIndice) {
 		String temp = data.getData().get(dataIndice);
 		temp = temp + "," + line;
-		data.getData().set(dataIndice, line);
+		data.getData().set(dataIndice, temp);
 	}
 }
