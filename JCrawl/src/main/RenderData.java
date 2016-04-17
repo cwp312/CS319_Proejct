@@ -27,6 +27,10 @@ public class RenderData {
 	public ArrayList<Integer> getCoordinateY() {
 		return coordinateY;
 	}
+	
+	public void addForeground(BufferedImage graphic) {
+		foreground.add(graphic);
+	}
 
 	public void addCoordinateY(int y) {
 		coordinateY.add(y);
