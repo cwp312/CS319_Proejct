@@ -29,7 +29,7 @@ public class LevelManager {
 		
 		newLevel.useDelimiter(",");
 		
-		ss = new SpriteSheet(new ImageLoader().load("terrain1"));
+		ss = new SpriteSheet(new ImageLoader().load("terrain"));
 		
 		int x = 0, y = 0;
 		while(newLevel.hasNext()) {
@@ -37,12 +37,11 @@ public class LevelManager {
 			switch(tile) {
 				case "0":
 					gfx.setTile(ss.crop(0, 0), x, y);
+					gfx.setCode(0, x, y);
 					break;
 				case "1":
 					gfx.setTile(ss.crop(1, 0), x, y);
-					break;
-				case "2":
-					gfx.setTile(ss.crop(2, 0), x, y);
+					gfx.setCode(1, x, y);
 					break;
 				default:
 					

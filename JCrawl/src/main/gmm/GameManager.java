@@ -6,6 +6,7 @@ import main.ExternalData;
 import main.GraphicGrid;
 import main.RenderData;
 import main.edm.FileManager;
+import main.gem.CollisionManager;
 import main.gom.EntityManager;
 import main.lm.LevelManager;
 
@@ -25,6 +26,7 @@ public class GameManager {
 	private FileManager file = new FileManager();
 	private LevelManager level = new LevelManager();
 	private EntityManager entity = new EntityManager();
+	private CollisionManager collisionM = new CollisionManager();
 
 	public GameManager() {
 		file.getFile("res/level.txt");
@@ -36,19 +38,7 @@ public class GameManager {
 	}
 
 	public void update() {
-		if (keyPressed[0]) {
-			System.out.println("W");
-		}
-		if (keyPressed[1]) {
-			System.out.println("A");
-		}
-		if (keyPressed[2]) {
-			System.out.println("S");
-		}
-		if (keyPressed[3]) {
-			System.out.println("D");
-		}
-		
+		collision = collisionM.update(levelChanged, entities, gfx);
 		entity.update(collision, keyPressed);
 	}
 
@@ -65,7 +55,7 @@ public class GameManager {
 	}
 
 	public void initializeCollision() {
-
+		collision = collisionM.initializeCollision(entities, gfx);
 	}
 
 	public static void setKeyPressed(boolean[] keyPressed) {

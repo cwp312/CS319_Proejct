@@ -16,7 +16,6 @@ public class Platform extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -2068497138246194475L;
 
-	private RenderData rd;
 	private static int width = 1024, height = 768 + 24;
 	private Map<String, String> settings;
 	private JFrame frame = new JFrame("JCrawl");
