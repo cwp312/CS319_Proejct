@@ -12,7 +12,7 @@ public class FileManager {
 	private Scanner parser;
 	private ExternalData data = new ExternalData();
 
-	private boolean player = false;
+	private boolean player = false, entity_AI = false;
 	private int dataPassCounter = 0, dataIndice = 0;
 
 	/**
@@ -93,12 +93,20 @@ public class FileManager {
 
 			if (player) {
 				parsePlayer(newLine);
+			} else if(entity_AI) {
+				parseEntityAI(newLine);
 			}
 
 			if (newLine.equals("p_") && player == false) {
 				data.getTag().add("Player");
 				player = true;
+				entity_AI = false;
+			} else if(newLine.equals("AI") && entity_AI == false) {
+				data.getTag().add("AI");
+				player = false;
+				entity_AI = true;
 			}
+			
 		}
 		s.close();
 	}
@@ -106,13 +114,29 @@ public class FileManager {
 	private void parsePlayer(String line) {
 		if (dataPassCounter == 0) {
 			addToData(line);
-			dataIndice = data.getTag().lastIndexOf("Player");
+			dataIndice++;
 			dataPassCounter++;
 		} else if (dataPassCounter < 2) {
 			concatToData(line, dataIndice);
 			if (dataPassCounter >= 2) {
 				dataPassCounter = 0;
 				player = false;
+				return;
+			}
+			dataPassCounter++;
+		}
+	}
+	
+	private void parseEntityAI(String line) {
+		if (dataPassCounter == 0) {
+			addToData(line);
+			dataIndice++;
+			dataPassCounter++;
+		} else if(dataPassCounter < 4) {
+			concatToData(line, dataIndice);
+			if (dataPassCounter >= 4) {
+				dataPassCounter = 0;
+				entity_AI = false;
 				return;
 			}
 			dataPassCounter++;
@@ -133,5 +157,6 @@ public class FileManager {
 		String temp = data.getData().get(dataIndice);
 		temp = temp + "," + line;
 		data.getData().set(dataIndice, temp);
+		dataPassCounter++;
 	}
 }

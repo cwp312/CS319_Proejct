@@ -12,8 +12,8 @@ public class EntityManager {
 	public EntityGrid update(CollisionGrid collision, boolean[] keyPressed) {
 		entities.getPlayer().update(collision, keyPressed);
 		
-		for(int i = 0; i <= entities.getData().size(); i++) {
-			
+		for(int i = 0; i < entities.getData().size(); i++) {
+			entities.getData().get(i).update(collision);
 		}
 		return entities;
 	}
@@ -26,6 +26,8 @@ public class EntityManager {
 			
 			if(tag.equals("Player")) {
 				parsePlayerData(data, i);
+			} else if(tag.equals("AI")) {
+				parseAIData(data, i);
 			} // TODO other entity types
 		}
 		return entities;
@@ -45,6 +47,29 @@ public class EntityManager {
 		p.create(xLoc * Entity.size, yLoc * Entity.size);
 		
 		entities.setPlayer(p);
+		s.close();
+	}
+	
+	private void parseAIData(ExternalData data, int indice) {
+		String eData = data.getData().get(indice);
+		Entity e = null;
+		
+		// AI entity data = type, xLoc, yLoc
+		Scanner s = new Scanner(eData);
+		s.useDelimiter(",");
+		
+		String type = s.next();
+		int xLoc = Integer.parseInt(s.next());
+		int yLoc = Integer.parseInt(s.next());
+		
+		switch(type) {
+		case "slime":
+			e = new Slime();
+			e.create(xLoc * Entity.size, yLoc * Entity.size);
+			break;
+		}
+		
+		entities.addData(e);
 		s.close();
 	}
 }

@@ -16,11 +16,11 @@ public class GraphicsAssembler {
 		data.addCoordinateX(entities.getPlayer().getXLoc());
 		data.addCoordinateY(entities.getPlayer().getYLoc());
 		
-		if(entities.getData().size() > 0) {
-			int offset = 1;
-			
+		if(entities.getData().size() > 0) {	
 			for(int i = 0; i < entities.getData().size(); i++) {
-			
+				data.addForeground(entities.getData().get(i).getGraphic());
+				data.addCoordinateX(entities.getData().get(i).getXLoc());
+				data.addCoordinateY(entities.getData().get(i).getYLoc());
 			}
 		}
 		

@@ -15,3 +15,5 @@
 
 [entity]
 p_,7,5
+AI,slime,4,5
+AI,slime,2,7
