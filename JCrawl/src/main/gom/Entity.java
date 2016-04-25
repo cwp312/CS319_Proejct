@@ -3,86 +3,122 @@ package main.gom;
 import java.awt.image.BufferedImage;
 
 import main.CollisionGrid;
+import main.EntityGrid;
 
 public abstract class Entity {
-	protected int xLoc, yLoc;
+	protected int xLoc, yLoc, dir;
 	protected static int size = 64;
 	protected BufferedImage graphic;
-	
+	protected int indice;
+	protected int x1, y1;
+
 	public abstract void create(int xLoc, int yLoc);
-	public abstract void destroy();
-	public abstract void update(CollisionGrid collision);
+
+	public abstract boolean destroy();
+
+	public abstract void update(CollisionGrid collision, EntityGrid entities);
+
 	public BufferedImage getGraphic() {
 		return graphic;
 	}
+
 	public int getXLoc() {
 		return xLoc;
 	}
+
 	public int getYLoc() {
 		return yLoc;
-	}	
+	}
 	
-	protected boolean collisionCheck(int dir, CollisionGrid collision, int movementSpeed) {
+	public void setIndex(int i) {
+		indice = i;
+	}
+	
+	public int getIndex() {
+		return indice;
+	}
+	
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+	
+	public void setDestination(int x1, int y1) {
+		this.x1 = x1;
+		this.y1 = y1;
+	}
+	
+	public int getX1() {
+		return x1;
+	}
+	
+	public int getY1() {
+		return y1;
+	}
+
+	protected boolean collisionCheck(int dir, CollisionGrid collision,
+			int movementSpeed) {
 		boolean b = false;
 		boolean calcB0 = false, calcB1 = false;
 		int calcX = 0;
 		int calcY = 0;
-		
-		switch(dir) {
+
+		switch (dir) {
 		case 0:
 			calcX = xLoc / collision.getSize();
-			calcY = (yLoc - movementSpeed + (movementSpeed/2)) / collision.getSize();
-			
+			calcY = (yLoc - movementSpeed + (movementSpeed / 2))
+					/ collision.getSize();
+
 			calcB0 = collision.getTileCollision()[calcX][calcY];
-			if(xLoc % collision.getSize() > movementSpeed) {
-				calcB1 = collision.getTileCollision()[calcX+1][calcY];
+			if (xLoc % collision.getSize() > movementSpeed) {
+				calcB1 = collision.getTileCollision()[calcX + 1][calcY];
 			}
-			if(calcB0 | calcB1) {
+			if (calcB0 | calcB1) {
 				b = true;
 			}
 			break;
 		case 1:
-			calcX = (xLoc - movementSpeed + (movementSpeed/2)) / collision.getSize();
+			calcX = (xLoc - movementSpeed + (movementSpeed / 2))
+					/ collision.getSize();
 			calcY = yLoc / collision.getSize();
-			
+
 			calcB0 = collision.getTileCollision()[calcX][calcY];
-			if(yLoc % collision.getSize() > movementSpeed) {
-				calcB1 = collision.getTileCollision()[calcX][calcY+1];
+			if (yLoc % collision.getSize() > movementSpeed) {
+				calcB1 = collision.getTileCollision()[calcX][calcY + 1];
 			}
-			if(calcB0 | calcB1) {
+			if (calcB0 | calcB1) {
 				b = true;
 			}
 			break;
 		case 2:
 			calcX = xLoc / collision.getSize();
-			calcY = (yLoc + movementSpeed - (movementSpeed/2)) / collision.getSize() + 1;
-			
+			calcY = (yLoc + movementSpeed - (movementSpeed / 2))
+					/ collision.getSize() + 1;
+
 			calcB0 = collision.getTileCollision()[calcX][calcY];
-			if(xLoc % collision.getSize() > movementSpeed) {
-				calcB1 = collision.getTileCollision()[calcX+1][calcY];
+			if (xLoc % collision.getSize() > movementSpeed) {
+				calcB1 = collision.getTileCollision()[calcX + 1][calcY];
 			}
-			if(calcB0 | calcB1) {
+			if (calcB0 | calcB1) {
 				b = true;
 			}
 			break;
 		case 3:
-			calcX = (xLoc + movementSpeed - (movementSpeed/2)) / collision.getSize() + 1;
+			calcX = (xLoc + movementSpeed - (movementSpeed / 2))
+					/ collision.getSize() + 1;
 			calcY = yLoc / collision.getSize();
-			
+
 			calcB0 = collision.getTileCollision()[calcX][calcY];
-			if(yLoc % collision.getSize() > movementSpeed) {
-				calcB1 = collision.getTileCollision()[calcX][calcY+1];
+			if (yLoc % collision.getSize() > movementSpeed) {
+				calcB1 = collision.getTileCollision()[calcX][calcY + 1];
 			}
-			if(calcB0 | calcB1) {
+			if (calcB0 | calcB1) {
 				b = true;
 			}
 			break;
 		}
-		
-		System.out.println(calcX + " " + calcY);
 		return b;
 	}
-	
+
 	protected void updateMovement(int dir, int movementSpeed) {
 		switch (dir) {
 		case 0:
@@ -98,5 +134,30 @@ public abstract class Entity {
 			xLoc += movementSpeed;
 			break;
 		}
+	}
+
+	protected Entity createProjectile(int x, int y, int dir) {
+		Projectile e = new Projectile();
+		switch (dir) {
+		case 0:
+			e.create(x, y - Entity.size);
+			break;
+		case 1:
+			e.create(x - Entity.size, y);
+			break;
+		case 2:
+			e.create(x, y + Entity.size);
+			break;
+		case 3:
+			e.create(x + Entity.size, y);
+			break;
+		}
+		e.setDir(dir);
+		return e;
+	}
+	
+	protected void initializeIndex(EntityGrid entities) {
+		int index = entities.getData().size() - 1;
+		entities.getData().get(index).setIndex(index);
 	}
 }

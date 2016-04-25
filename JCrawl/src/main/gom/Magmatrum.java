@@ -7,8 +7,8 @@ import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
-public class Slime extends Entity {
-	private int movementSpeed = 2, counter = 0;
+public class Magmatrum extends Entity {
+	private int movementSpeed = 2, dir = 0, counter = 0;
 	private boolean moveComplete = true;
 
 	public void create(int xLoc, int yLoc) {
@@ -16,7 +16,6 @@ public class Slime extends Entity {
 		this.yLoc = yLoc;
 		// TODO SpriteSheet support
 		this.graphic = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 0);
-		this.dir = 0;
 	}
 
 	public boolean destroy() {
@@ -24,6 +23,7 @@ public class Slime extends Entity {
 	}
 
 	public void update(CollisionGrid collision, EntityGrid entities) {
+		// TODO Change moved ground to the "Scorced Earth" (burning ground)
 		if(moveComplete) {
 			dir = new Random().nextInt(4);
 			counter = 0;
@@ -39,5 +39,6 @@ public class Slime extends Entity {
 			}
 		}
 	}
+
 
 }

@@ -12,7 +12,7 @@ public class FileManager {
 	private Scanner parser;
 	private ExternalData data = new ExternalData();
 
-	private boolean player = false, entity_AI = false;
+	private boolean player = false, entity_AI = false, entity_st = false, entity_pt = false;
 	private int dataPassCounter = 0, dataIndice = 0;
 
 	/**
@@ -95,17 +95,37 @@ public class FileManager {
 				parsePlayer(newLine);
 			} else if(entity_AI) {
 				parseEntityAI(newLine);
+			} else if(entity_st) {
+				parseEntityStationary(newLine);
+			} else if(entity_pt) {
+				parseEntityPatrol(newLine);
 			}
 
 			if (newLine.equals("p_") && player == false) {
 				data.getTag().add("Player");
 				player = true;
 				entity_AI = false;
+				entity_st = false;
+				entity_pt = false;
 			} else if(newLine.equals("AI") && entity_AI == false) {
 				data.getTag().add("AI");
 				player = false;
 				entity_AI = true;
-			}
+				entity_st = false;
+				entity_pt = false;
+			} else if(newLine.equals("stationary") && entity_st == false) {
+				data.getTag().add("stationary");
+				player = false;
+				entity_AI = false;
+				entity_st = true;
+				entity_pt = false;
+			} else if(newLine.equals("patrol") && entity_pt == false) {
+				data.getTag().add("patrol");
+				player = false;
+				entity_AI = false;
+				entity_st = false;
+				entity_pt = true;
+			} 
 			
 		}
 		s.close();
@@ -132,11 +152,43 @@ public class FileManager {
 			addToData(line);
 			dataIndice++;
 			dataPassCounter++;
-		} else if(dataPassCounter < 4) {
+		} else if(dataPassCounter <= 4) {
 			concatToData(line, dataIndice);
 			if (dataPassCounter >= 4) {
 				dataPassCounter = 0;
 				entity_AI = false;
+				return;
+			}
+			dataPassCounter++;
+		}
+	}
+	
+	private void parseEntityStationary(String line) {
+		if (dataPassCounter == 0) {
+			addToData(line);
+			dataIndice++;
+			dataPassCounter++;
+		} else if(dataPassCounter <= 5) {
+			concatToData(line, dataIndice);
+			if (dataPassCounter >= 5) {
+				dataPassCounter = 0;
+				entity_st = false;
+				return;
+			}
+			dataPassCounter++;
+		}
+	}
+	
+	private void parseEntityPatrol(String line) {
+		if (dataPassCounter == 0) {
+			addToData(line);
+			dataIndice++;
+			dataPassCounter++;
+		} else if(dataPassCounter <= 7) {
+			concatToData(line, dataIndice);
+			if (dataPassCounter >= 7) {
+				dataPassCounter = 0;
+				entity_pt = false;
 				return;
 			}
 			dataPassCounter++;

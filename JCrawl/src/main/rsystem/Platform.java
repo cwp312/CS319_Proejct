@@ -19,7 +19,8 @@ public class Platform extends Canvas implements Runnable {
 	private static int width = 1024, height = 768 + 24;
 	private Map<String, String> settings;
 	private JFrame frame = new JFrame("JCrawl");
-	private boolean isPaused, running = false;
+	private static boolean isPaused = false;
+	private boolean running = false;
 
 	private Thread gameThread;
 
@@ -105,8 +106,8 @@ public class Platform extends Canvas implements Runnable {
 
 	}
 
-	public void pauseGame() {
-
+	public static void pauseGame() {
+		isPaused = !isPaused;
 	}
 
 	public synchronized void start() {
@@ -145,5 +146,9 @@ public class Platform extends Canvas implements Runnable {
 		game.frame.add(game);
 
 		game.start();
+	}
+
+	public static boolean getIsPaused() {
+		return isPaused;
 	}
 }

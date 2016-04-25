@@ -27,6 +27,12 @@ public class InputManager implements KeyListener {
 		case KeyEvent.VK_D:
 			keyPressed[3] = true;
 			break;
+		case KeyEvent.VK_Z:
+			keyPressed[4] = true;
+			break;
+		case KeyEvent.VK_ESCAPE:
+			keyPressed[6] = true;
+			break;
 		}
 		GameManager.setKeyPressed(keyPressed);
 	}
@@ -45,6 +51,12 @@ public class InputManager implements KeyListener {
 			break;
 		case KeyEvent.VK_D:
 			keyPressed[3] = false;
+			break;
+		case KeyEvent.VK_Z:
+			keyPressed[4] = false;
+			break;
+		case KeyEvent.VK_ESCAPE:
+			keyPressed[6] = false;
 			break;
 		}
 		GameManager.setKeyPressed(keyPressed);

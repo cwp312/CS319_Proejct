@@ -25,5 +25,10 @@ public class EntityGrid {
 		this.p = p;
 	}
 	
-	
+	public void destroy(int index) {
+		data.remove(index);
+		for(int i = 0; i < data.size(); i++) {
+			data.get(i).setIndex(i);
+		}
+	}
 }

@@ -9,6 +9,7 @@ import main.edm.FileManager;
 import main.gem.CollisionManager;
 import main.gom.EntityManager;
 import main.lm.LevelManager;
+import main.rsystem.Platform;
 
 public class GameManager {
 
@@ -38,8 +39,13 @@ public class GameManager {
 	}
 
 	public void update() {
+		if(keyPressed[6]) {
+			Platform.pauseGame();
+		}
+		if(!Platform.getIsPaused()) {
 		collision = collisionM.update(levelChanged, entities, gfx);
 		entity.update(collision, keyPressed);
+		}
 	}
 
 	public RenderData render() {
