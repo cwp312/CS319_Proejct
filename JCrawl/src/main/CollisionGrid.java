@@ -19,8 +19,8 @@ public class CollisionGrid {
 		return pixelCollision;
 	}
 
-	public void addPixelCollision(Coordinates c) {
-		pixelCollision.add(c);
+	public void setPixelCollision(ArrayList<Coordinates> pixelCollision) {
+		this.pixelCollision = pixelCollision;
 	}
 
 	public int getSize() {

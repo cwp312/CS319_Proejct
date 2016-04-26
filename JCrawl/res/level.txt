@@ -15,7 +15,6 @@
 
 [entity]
 p_,7,5
-AI,slime,4,5
-AI,wolf,2,7
-stationary,archer,1,1,2
-patrol,goblin,5,2,5,4
+AI,slime,2,2
+AI,wolf,4,4
+stationary,archer,10,4,2

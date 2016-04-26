@@ -16,18 +16,22 @@ public class InputManager implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
+		case KeyEvent.VK_UP:
 			keyPressed[0] = true;
 			break;
 		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			keyPressed[1] = true;
 			break;
 		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			keyPressed[2] = true;
 			break;
 		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			keyPressed[3] = true;
 			break;
-		case KeyEvent.VK_Z:
+		case KeyEvent.VK_SPACE:
 			keyPressed[4] = true;
 			break;
 		case KeyEvent.VK_ESCAPE:
@@ -41,18 +45,22 @@ public class InputManager implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
+		case KeyEvent.VK_UP:
 			keyPressed[0] = false;
 			break;
 		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			keyPressed[1] = false;
 			break;
 		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			keyPressed[2] = false;
 			break;
 		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			keyPressed[3] = false;
 			break;
-		case KeyEvent.VK_Z:
+		case KeyEvent.VK_SPACE:
 			keyPressed[4] = false;
 			break;
 		case KeyEvent.VK_ESCAPE:

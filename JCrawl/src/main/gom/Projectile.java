@@ -19,13 +19,13 @@ public class Projectile extends Entity {
 	}
 
 	@Override
-	public boolean destroy() {
-		return true;
+	public void destroy(EntityGrid entities) {
+		entities.destroy(indice);
 	}
 
 	public void update(CollisionGrid collision, EntityGrid entities) {
 		if (collisionCheck(dir, collision, movementSpeed)) {
-			entities.destroy(indice);
+			destroy(entities);
 		} else {
 			updateMovement(dir, movementSpeed);
 		}

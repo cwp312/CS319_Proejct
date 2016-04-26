@@ -5,7 +5,7 @@ import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
-public class Goblin extends Entity {
+public class Goblin extends Enemy {
 	private int movementSpeed = 2, counter = 0;
 	private int routeLength;
 	private boolean moveComplete = false;
@@ -35,13 +35,10 @@ public class Goblin extends Entity {
 		} else {
 			routeLength = Math.abs(yLoc - getY1());
 		}
-		
-		System.out.println(routeLength);
 	}
 
 	@Override
-	public boolean destroy() {
-		return false;
+	public void destroy(EntityGrid entities) {
 	}
 
 	@Override
@@ -66,11 +63,21 @@ public class Goblin extends Entity {
 		}
 		
 		if(!moveComplete) {
-			if(collisionCheck(dir, collision, movementSpeed) || ((counter / routeLength) < 1)) {
+			if(collisionCheck(dir, collision, movementSpeed)
+					|| ((counter / routeLength) < 1)
+					&& !detectCollision(collision, dir, movementSpeed)) {
 				counter += movementSpeed;
 				updateMovement(dir, movementSpeed);
 			} else {
 				moveComplete = true;
+			}
+		}
+
+		if (detectProjectileCollision(collision, entities, "p_projectile")) {
+			if(health > 0) {
+				health--;
+			} else {
+				entities.destroy(indice);
 			}
 		}
 	}

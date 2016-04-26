@@ -85,6 +85,7 @@ public class EntityManager {
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		}
+		e.setKey("entity");
 		
 		entities.addData(e);
 		initializeIndex(entities);
@@ -110,6 +111,7 @@ public class EntityManager {
 			e.setDir(Integer.parseInt(s.next()));
 			break;
 		}
+		e.setKey("entity");
 		
 		entities.addData(e);
 		initializeIndex(entities);
@@ -137,6 +139,7 @@ public class EntityManager {
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		}
+		e.setKey("entity");
 		
 		entities.addData(e);
 		initializeIndex(entities);

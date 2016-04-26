@@ -1,43 +1,25 @@
 package main.gom;
 
-import java.util.Random;
-
 import main.CollisionGrid;
 import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
-public class Magmatrum extends Entity {
-	private int movementSpeed = 2, dir = 0, counter = 0;
-	private boolean moveComplete = true;
+public class Magmatrum extends Enemy {
 
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
 		// TODO SpriteSheet support
 		this.graphic = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 0);
+		this.movementSpeed = 2;
 	}
 
-	public boolean destroy() {
-		return false;
+	public void destroy(EntityGrid entities) {
 	}
 
 	public void update(CollisionGrid collision, EntityGrid entities) {
-		// TODO Change moved ground to the "Scorced Earth" (burning ground)
-		if(moveComplete) {
-			dir = new Random().nextInt(4);
-			counter = 0;
-			moveComplete = false;
-		}
-		
-		if(!moveComplete) {
-			if(!collisionCheck(dir, collision, movementSpeed) && (counter / Entity.size < 1)) {
-				counter += movementSpeed;
-				updateMovement(dir, movementSpeed);
-			} else {
-				moveComplete = true;
-			}
-		}
+		update(collision, entities, "AI");
 	}
 
 

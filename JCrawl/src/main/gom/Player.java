@@ -1,6 +1,7 @@
 package main.gom;
 
 import main.CollisionGrid;
+import main.Debug;
 import main.EntityGrid;
 import main.ImageLoader;
 import main.PlayerData;
@@ -8,7 +9,7 @@ import main.PlayerData;
 public class Player extends Entity {
 
 	private int health = 0, movementSpeed = 8, attackSpeed = 10,
-			energy = 0, dir = 0;
+			energy = 0, dir = 0, buffer = 0;
 	private PlayerData playerInfo = new PlayerData();
 
 	// private Ability abilities[] = new Abilities[];
@@ -19,12 +20,12 @@ public class Player extends Entity {
 		this.yLoc = yLoc;
 		// TODO SpriteSheet support
 		this.graphic = new ImageLoader().load("player");
+		health = 10;
 		indice = -1;
 	}
 
 	@Override
-	public boolean destroy() {
-		return true;
+	public void destroy(EntityGrid entities) {
 	}
 
 	/**
@@ -34,6 +35,10 @@ public class Player extends Entity {
 	 */
 	public void update(CollisionGrid collision, boolean[] keyPressed,
 			EntityGrid entities) {
+		if(buffer < 48) {
+			buffer++;
+		}
+		
 		if(energy < 120) {
 			energy += attackSpeed;
 		}
@@ -65,9 +70,26 @@ public class Player extends Entity {
 		if (keyPressed[4]) {
 			if (energy >= 120) {
 				energy = 0;
-				entities.addData(createProjectile(xLoc, yLoc, dir));
+				entities.addData(createProjectile(xLoc, yLoc, dir, "p_projectile"));
 				initializeIndex(entities);
 			}
+		}
+		
+		if(detectCollision(collision, dir, movementSpeed) && buffer == 48) {
+			health--;
+			buffer = 0;
+			Debug.output("Player", health);
+		}
+		
+		if(detectProjectileCollision(collision, entities, "projectile") && buffer == 48) {
+			health--;
+			buffer = 0;
+			Debug.output("Player", health);
+		}
+		
+		
+		if(health < 1) {
+			// TODO gameover
 		}
 	}
 
