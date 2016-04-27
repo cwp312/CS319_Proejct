@@ -11,8 +11,8 @@ public class Archer extends Enemy {
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
-		// TODO SpriteSheet support
-		this.graphic = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 0);
+		frontImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 3);
+		backImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(1, 3);
 	}
 
 	public void destroy(EntityGrid entities) {
@@ -33,6 +33,11 @@ public class Archer extends Enemy {
 				entities.destroy(indice);
 			}
 		}
+	}
+	@Override
+	public void setDir(int dir){
+		this.dir = dir;
+		this.graphic = (dir == 0) ? backImage : frontImage;
 	}
 
 }

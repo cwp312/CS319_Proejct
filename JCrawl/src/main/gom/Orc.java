@@ -10,8 +10,9 @@ public class Orc extends Enemy {
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
-		// TODO SpriteSheet support
-		this.graphic = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 0);
+		frontImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 6);
+		backImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(1, 6);
+		this.graphic = frontImage;
 		this.movementSpeed = 2;
 	}
 
