@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import main.CollisionGrid;
 import main.EntityGrid;
+import main.ImageLoader;
+import main.SpriteSheet;
 
 public abstract class Entity {
 	protected int xLoc, yLoc, dir;
@@ -187,15 +189,11 @@ public abstract class Entity {
 		return b;
 	}
 
-	// TODO
-	// TODO
-	// TODO
-	// FIX THIS
 	protected boolean detectCollision(CollisionGrid collision, int dir,
 			int movementSpeed) {
 		boolean b = false;
 		int compX = 0, compY = 0;
-
+		
 		for (int i = 0; i < collision.getPixelCollision().size(); i++) {
 			if (collision.getPixelCollision().get(i).getKey().equals("entity")) {
 				compX = collision.getPixelCollision().get(i).getX();
@@ -243,8 +241,18 @@ public abstract class Entity {
 		int index = entities.getData().size() - 1;
 		entities.getData().get(index).setIndex(index);
 	}
+	
+	protected BufferedImage animate(int dir, int spritesheetX, int spritesheetY) {
+		int y = spritesheetY;
+		int x = spritesheetX;
+		
+		if(dir == 0) {
+			x += 1;
+		}
+		return new SpriteSheet(new ImageLoader().load("monsters")).crop(x, y);
+	}
 
-	private boolean checkXRange(int target, int recipient, int dir,
+	protected boolean checkXRange(int target, int recipient, int dir,
 			int movementSpeed) {
 		// If the difference between the target X coordinate and recipient X
 		// coordinate is less than the size
@@ -264,7 +272,7 @@ public abstract class Entity {
 		}
 	}
 
-	private boolean checkYRange(int target, int recipient, int dir,
+	protected boolean checkYRange(int target, int recipient, int dir,
 			int movementSpeed) {
 		if ((dir == 0) || (dir == 2)) {
 			if ((Math.abs(target - recipient) - movementSpeed) < Entity.size) {
@@ -279,5 +287,26 @@ public abstract class Entity {
 				return false;
 			}
 		}
+	}
+	
+	protected Entity generateFlame(int x, int y, int dir) {
+		Flame e = new Flame();
+		
+		switch(dir) {
+		case 0:
+			e.create(x, y + Entity.size);
+			break;
+		case 1:
+			e.create(x + Entity.size, y);
+			break;
+		case 2:
+			e.create(x, y - Entity.size);
+			break;
+		case 3:
+			e.create(x - Entity.size, y);
+			break;
+		}
+		e.setKey("entity");
+		return e;
 	}
 }

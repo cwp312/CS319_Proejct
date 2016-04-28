@@ -2,23 +2,27 @@ package main.gom;
 
 import main.CollisionGrid;
 import main.EntityGrid;
-import main.ImageLoader;
-import main.SpriteSheet;
 
 public class Archer extends Enemy {
 	private int counter = 0, attackSpeed = 2;
+	private boolean init = false;
 
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
-		frontImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 3);
-		backImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(1, 3);
+		// TODO SpriteSheet support
+		this.graphic = animate(dir, 0, 3);
 	}
 
 	public void destroy(EntityGrid entities) {
 	}
 
 	public void update(CollisionGrid collision, EntityGrid entities) {
+		if(!init) {
+			init = true;
+			this.graphic = animate(dir, 0, 3);
+		}
+		
 		counter += attackSpeed;
 		if(counter >= 100) {
 			entities.addData(this.createProjectile(xLoc, yLoc, dir, "projectile"));
@@ -33,11 +37,6 @@ public class Archer extends Enemy {
 				entities.destroy(indice);
 			}
 		}
-	}
-	@Override
-	public void setDir(int dir){
-		this.dir = dir;
-		this.graphic = (dir == 0) ? backImage : frontImage;
 	}
 
 }

@@ -1,15 +1,19 @@
 package main.rsystem;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 import javax.swing.JFrame;
 
+import main.ImageLoader;
 import main.RenderData;
 import main.gmm.GameManager;
+import main.gom.Player;
 import main.im.InputManager;
 
 public class Platform extends Canvas implements Runnable {
@@ -19,13 +23,17 @@ public class Platform extends Canvas implements Runnable {
 	private static int width = 1024, height = 768 + 24;
 	private Map<String, String> settings;
 	private JFrame frame = new JFrame("JCrawl");
-	private static boolean isPaused = false;
+	private static boolean isPaused = false, isDead = false;
 	private boolean running = false;
 
 	private Thread gameThread;
 
 	private GameManager gm = new GameManager();
+	private UI ui = new UI();
 
+	/*
+	 * Main game loop
+	 */
 	public void run() {
 		initializeGame();
 
@@ -58,11 +66,22 @@ public class Platform extends Canvas implements Runnable {
 			}
 		}
 	}
-
+	
+	/*
+	 * Game data update
+	 */
 	public void update() {
 		gm.update();
+		ui.update();
+		if(Player.getHealth() <= 0) {
+			isDead = true;
+			isPaused = true;
+		}
 	}
-
+	
+	/*
+	 * Actual render
+	 */
 	public void render() {
 		RenderData rd = new RenderData();
 
@@ -74,6 +93,8 @@ public class Platform extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, width, height);
 
+		// Render menus here
+		
 		// Render here
 		rd = gm.render();
 		int size = rd.getSize();
@@ -88,28 +109,54 @@ public class Platform extends Canvas implements Runnable {
 			g.drawImage(rd.getForeground().get(i), rd.getCoordinateX().get(i),
 					rd.getCoordinateY().get(i), size, size, null);
 		}
+		
+		// Render UI here
+		ui.render(g);
+		
+		// Pause Menu rendered here
+		if(isDead) {
+			BufferedImage deadscreen = new ImageLoader().load("gameover");
+			g.drawImage(deadscreen, 0, 0, width, height, null);
+			g.setColor(Color.WHITE);
+			g.drawString("GAMEOVER", 480, 340);
+		}
 
 		bs.show();
 		g.dispose();
 	}
-
+	
+	/*
+	 * Initialize the game
+	 */
 	public void initializeGame() {
 		this.addKeyListener(new InputManager());
 		gm = new GameManager();
 	}
-
+	
+	/*
+	 * 
+	 */
 	public void renderMenu() {
 
 	}
 
+	/*
+	 * 
+	 */
 	public void renderMenu(PanelType panelType) {
 
 	}
 
+	/*
+	 * Pause the game
+	 */
 	public static void pauseGame() {
 		isPaused = !isPaused;
 	}
 
+	/**
+	 * Start the thread
+	 */
 	public synchronized void start() {
 		running = true;
 
@@ -117,6 +164,9 @@ public class Platform extends Canvas implements Runnable {
 		gameThread.start();
 	}
 
+	/**
+	 * Stop the thread
+	 */
 	public synchronized void stop() {
 		running = false;
 
@@ -128,11 +178,6 @@ public class Platform extends Canvas implements Runnable {
 		}
 	}
 
-	/**
-	 * 
-	 * @param settings
-	 *            Contains setting data
-	 */
 	public void saveGameSettings(Map<String, String> settings) {
 		this.settings = settings;
 	}

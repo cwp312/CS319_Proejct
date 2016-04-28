@@ -7,7 +7,6 @@ import main.RenderData;
 public class GraphicsAssembler {
 	
 	public RenderData render(GraphicGrid gfx, EntityGrid entities) {
-		//TODO(Someone) Finish implementation
 		RenderData data = new RenderData();
 		
 		data.setBackground(gfx.getTiles());

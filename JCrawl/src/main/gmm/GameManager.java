@@ -13,16 +13,16 @@ import main.rsystem.Platform;
 
 public class GameManager {
 
-	// TODO(Cheol Woo) Finish the data storage class implementation
 	private GraphicGrid gfx;
 	private EntityGrid entities;
 	private CollisionGrid collision;
 	private ExternalData data;
 	private GraphicsAssembler ga = new GraphicsAssembler();
 
-	private boolean levelChanged = false;
+	private static boolean levelChanged = false;
 	private static boolean keyPressed[] = { false, false, false, false, false,
 			false, false };
+	private int curLevel = 0;
 
 	private FileManager file = new FileManager();
 	private LevelManager level = new LevelManager();
@@ -30,28 +30,35 @@ public class GameManager {
 	private CollisionManager collisionM = new CollisionManager();
 
 	public GameManager() {
-		file.getFile("res/level.txt");
-		data = file.parseFile();
-
-		initializeLevel();
-		initializeEntities();
-		initializeCollision();
+		initialize("level.txt");
 	}
 
+	/*
+	 * Update the game
+	 */
 	public void update() {
-		if(keyPressed[6]) {
+		if (keyPressed[6]) {
 			Platform.pauseGame();
 		}
-		if(!Platform.getIsPaused()) {
-		collision = collisionM.update(levelChanged, entities, gfx);
-		entity.update(collision, keyPressed);
+		if (!Platform.getIsPaused()) {
+			collision = collisionM.update(entities, gfx);
+			entity.update(collision, keyPressed);
+		}
+		if(levelChanged) {
+			curLevel++;
+			initialize("level" + curLevel + ".txt");
+			levelChanged = false;
 		}
 	}
-
+	
+	/*
+	 * Compile the data it holds into actual graphical data through GraphicsAssembler
+	 */
 	public RenderData render() {
 		return ga.render(gfx, entities);
 	}
 
+	// Initialization methods
 	public void initializeLevel() {
 		gfx = level.initializeLevel(data);
 	}
@@ -63,8 +70,22 @@ public class GameManager {
 	public void initializeCollision() {
 		collision = collisionM.initializeCollision(entities, gfx);
 	}
+	//
 
 	public static void setKeyPressed(boolean[] keyPressed) {
 		GameManager.keyPressed = keyPressed;
+	}
+
+	public static void setLevelChanged(boolean levelChanged) {
+		GameManager.levelChanged = levelChanged;
+	}
+	
+	private void initialize(String level) {
+		file.getFile("res/" + level);
+		data = file.parseFile();
+
+		initializeLevel();
+		initializeEntities();
+		initializeCollision();
 	}
 }

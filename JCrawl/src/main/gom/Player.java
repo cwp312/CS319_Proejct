@@ -1,28 +1,23 @@
 package main.gom;
 
-import java.awt.image.BufferedImage;
-
 import main.CollisionGrid;
 import main.Debug;
 import main.EntityGrid;
-import main.ImageLoader;
-import main.PlayerData;
-import main.SpriteSheet;
 
 public class Player extends Entity {
 
-	private int health = 0, movementSpeed = 8, attackSpeed = 10,
+	private int movementSpeed = 8, attackSpeed = 10,
 			energy = 0, dir = 0, buffer = 0;
-	private PlayerData playerInfo = new PlayerData();
-	private BufferedImage backImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(1, 0);
-	private BufferedImage frontImage = new SpriteSheet(new ImageLoader().load("monsters")).crop(0, 0);
+	private static int health = 0;
+
 	// private Ability abilities[] = new Abilities[];
 
 	@Override
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
-		this.graphic = frontImage;
+		// TODO SpriteSheet support
+		this.graphic = animate(dir, 0, 0);
 		health = 10;
 		indice = -1;
 	}
@@ -50,7 +45,7 @@ public class Player extends Entity {
 			if (!collisionCheck(0, collision, movementSpeed)) {
 				updateMovement(0, movementSpeed);
 				dir = 0;
-				updateGraphics(false);
+				this.graphic = animate(dir, 0, 0);
 			}
 		}
 		if (keyPressed[1]) {
@@ -63,7 +58,7 @@ public class Player extends Entity {
 			if (!collisionCheck(2, collision, movementSpeed)) {
 				updateMovement(2, movementSpeed);
 				dir = 2;
-				updateGraphics(true);
+				this.graphic = animate(dir, 0, 0);
 			}
 		}
 		if (keyPressed[3]) {
@@ -100,7 +95,7 @@ public class Player extends Entity {
 	public void update(CollisionGrid collision, EntityGrid entities) {
 	}
 	
-	private void updateGraphics(boolean isLookingDown){
-		this.graphic = isLookingDown ? frontImage : backImage;
+	public static int getHealth() {
+		return health;
 	}
 }

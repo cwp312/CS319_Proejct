@@ -8,12 +8,25 @@ import main.ExternalData;
 
 public class EntityManager {
 	EntityGrid entities;
+	private int entityCount = 0;
+	private boolean keySpawned = false;
 	
 	public EntityGrid update(CollisionGrid collision, boolean[] keyPressed) {
 		entities.getPlayer().update(collision, keyPressed, entities);
+		entityCount = 0;
 		
 		for(int i = 0; i < entities.getData().size(); i++) {
+			if(entities.getData().get(i).getKey().equals("entity")) {
+				entityCount++;
+			}
 			entities.getData().get(i).update(collision, entities);
+		}
+		
+		if(!keySpawned && (entityCount == 0)) {
+			Entity e = new Key();
+			e.create(7 * Entity.size, 5 * Entity.size);
+			e.setKey("DO");
+			entities.addData(e);
 		}
 		return entities;
 	}

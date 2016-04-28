@@ -16,7 +16,7 @@ public class FileManager {
 	private int dataPassCounter = 0, dataIndice = 0;
 
 	/**
-	 * 
+	 * Retrieves the file mentioned by the URL
 	 * @param URL
 	 *            URL to the file to be read
 	 */
@@ -32,9 +32,12 @@ public class FileManager {
 	}
 
 	/**
-	 * 
+	 * Precondition: getFile must be called first
 	 */
 	public ExternalData parseFile() {
+		dataPassCounter = 0;
+		dataIndice = 0;
+		
 		boolean levelFlag = false;
 		boolean entityFlag = false;
 		while (file.hasNextLine()) {

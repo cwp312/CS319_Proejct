@@ -10,7 +10,7 @@ import main.GraphicGrid;
 public class CollisionManager {
 	CollisionGrid collision = new CollisionGrid();
 	
-	public CollisionGrid update(boolean levelChanged, EntityGrid entities, GraphicGrid gfx) {
+	public CollisionGrid update(EntityGrid entities, GraphicGrid gfx) {
 		ArrayList<Coordinates> newCollision = new ArrayList<Coordinates>();
 		
 		newCollision.add(new Coordinates(entities.getPlayer().getXLoc(), entities.getPlayer().getYLoc(), "player"));
