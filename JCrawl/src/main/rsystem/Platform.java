@@ -182,15 +182,14 @@ public class Platform extends Canvas implements Runnable {
 		this.settings = settings;
 	}
 
-	public static void main(String args[]) {
-		Platform game = new Platform();
-		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.frame.setSize(new Dimension(width, height));
-		game.frame.setVisible(true);
-		game.frame.setResizable(false);
-		game.frame.add(game);
+	public Platform() {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(new Dimension(width, height));
+		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.add(this);
 
-		game.start();
+		start();
 	}
 
 	public static boolean getIsPaused() {

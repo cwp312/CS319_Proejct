@@ -16,8 +16,8 @@
 [entity]
 p_,7,5
 stationary,archer,7,1,2
-stationary,archer,8,14,0
+stationary,archer,8,10,0
 AI,slime,1,1
-AI,slime,14,14
+AI,slime,14,10
 AI,wolf,14,1
-AI,wolf,1,14
+AI,wolf,1,10
