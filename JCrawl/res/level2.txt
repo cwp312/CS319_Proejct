@@ -14,7 +14,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 [entity]
-p_,1,11
+p_,1,10
 patrol,goblin,5,1,1,1
 patrol,goblin,9,10,4,10
 stationary,archer,14,3,1

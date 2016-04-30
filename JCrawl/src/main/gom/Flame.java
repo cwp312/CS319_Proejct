@@ -5,9 +5,24 @@ import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
+/**
+ * Simple, non moving entity which will simply damage the player on contact
+ * @author Mustafa Fidan
+ *
+ */
 public class Flame extends Entity {
+
 	private int life = 0, frame = 0, frameCounter = 0;
 	private SpriteSheet ss = new SpriteSheet(new ImageLoader().load("flame"));
+	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Flame(int dimType) {
+		super(dimType);
+	}
+	
 	@Override
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;

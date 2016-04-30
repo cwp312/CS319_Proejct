@@ -11,13 +11,13 @@ import javax.swing.SwingConstants;
 
 public class MainMenuPanel extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2326340435914765337L;
 	static JButton btnStart, btnHowToPlay, btnBestiary, btnOptions, btnCredits;
 	JLabel mainBackground;
 	
+	/**
+	 * Initializes the main menu
+	 */
 	public MainMenuPanel(){
 		setBounds(0, 0, 1274, 691);																							
 		setLayout(null);

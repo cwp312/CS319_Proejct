@@ -8,13 +8,34 @@ import main.ImageLoader;
 import main.SpriteSheet;
 import main.gom.Player;
 
+/**
+ * In charge of health display
+ * @author Cheol Woo Park
+ *
+ */
 public class UI {
 	private int health, num_of_hearts;
-	private int size = 64;
+	private int size;
 	private LinkedList<BufferedImage> graphic = new LinkedList<BufferedImage>();
 	private static int positionX = 0, positionY = 768 - 64;
 	private boolean hasFraction = false;
-
+	
+	/**
+	 * Initializes the health display of the player.
+	 * @param dimType
+	 */
+	public UI(int dimType) {
+		if(dimType == 0) {
+			size = 64;
+		} else {
+			size = 50;
+			positionY = 600 - 50;
+		}
+	}
+	
+	/*
+	 * Update method to be included in Platform update()
+	 */
 	public void update() {
 		health = Player.getHealth();
 		graphic = new LinkedList<BufferedImage>();

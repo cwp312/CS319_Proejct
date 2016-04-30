@@ -7,9 +7,25 @@ import main.Coordinates;
 import main.EntityGrid;
 import main.GraphicGrid;
 
+/**
+ * Compiles graphics and entity data into collision data
+ * @author Arda Yucel
+ *
+ */
 public class CollisionManager {
-	CollisionGrid collision = new CollisionGrid();
+	CollisionGrid collision;
 	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public CollisionManager(int dimType) {
+		collision = new CollisionGrid(dimType);
+	}
+	
+	/*
+	 * Updates the collision grid
+	 */
 	public CollisionGrid update(EntityGrid entities, GraphicGrid gfx) {
 		ArrayList<Coordinates> newCollision = new ArrayList<Coordinates>();
 		
@@ -27,6 +43,12 @@ public class CollisionManager {
 		return collision;
 	}
 	
+	/**
+	 * Initializes the collision grid when the Game Manager is first initialized
+	 * @param entities
+	 * @param gfx
+	 * @return collision
+	 */
 	public CollisionGrid initializeCollision(EntityGrid entities, GraphicGrid gfx) {
 		for(int y = 0; y < GraphicGrid.getY(); y++) {
 			for(int x = 0; x < GraphicGrid.getX(); x++) {
@@ -47,6 +69,11 @@ public class CollisionManager {
 		return collision;
 	}
 	
+	/**
+	 * Unused due to change in design
+	 * @deprecated
+	 * @return false
+	 */
 	public boolean hasCollided() {
 		boolean b = false;
 		

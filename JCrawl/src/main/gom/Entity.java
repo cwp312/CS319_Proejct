@@ -7,18 +7,49 @@ import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
+/**
+ * Entity super class
+ * @author Arda Yucel, Cheol Woo Park, Fatih Tas, Mustafa Fidan
+ *
+ */
 public abstract class Entity {
 	protected int xLoc, yLoc, dir;
-	protected static int size = 64;
+	protected static int size;
 	protected BufferedImage graphic;
 	protected int indice;
-	protected int x1, y1;
+	protected int x1, y1, dimType;
 	protected String key;
+	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Entity(int dimType) {
+		this.dimType = dimType;
+		
+		if(dimType == 0) {
+			size = 64;
+		} else {
+			size = 50;
+		}
+	}
 
+	/**
+	 * Instead of the contructor, create method will be in charge of initialization
+	 * @param xLoc
+	 * @param yLoc
+	 */
 	public abstract void create(int xLoc, int yLoc);
 
+	/**
+	 * Destroys the entity
+	 * @param entities
+	 */
 	public abstract void destroy(EntityGrid entities);
 
+	/*
+	 * Individual update methods will be called by update method of EntityManager
+	 */
 	public abstract void update(CollisionGrid collision, EntityGrid entities);
 
 	public BufferedImage getGraphic() {
@@ -66,6 +97,15 @@ public abstract class Entity {
 		this.key = key;
 	}
 
+	/**
+	 * Checks collision with the level elements (the tile map)
+	 * When there is a collision, it will return true, and will return false if
+	 * no collision was detected.
+	 * @param dir
+	 * @param collision
+	 * @param movementSpeed
+	 * @return boolean
+	 */
 	protected boolean collisionCheck(int dir, CollisionGrid collision,
 			int movementSpeed) {
 		boolean b = false;
@@ -130,6 +170,11 @@ public abstract class Entity {
 		return b;
 	}
 
+	/**
+	 * Moves the given entity to the direction given and by amount defined by movementSpeed
+	 * @param dir
+	 * @param movementSpeed
+	 */
 	protected void updateMovement(int dir, int movementSpeed) {
 		switch (dir) {
 		case 0:
@@ -147,8 +192,16 @@ public abstract class Entity {
 		}
 	}
 
+	/**
+	 * Creates a new projectile
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param key
+	 * @return Projectile
+	 */
 	protected Entity createProjectile(int x, int y, int dir, String key) {
-		Projectile e = new Projectile();
+		Projectile e = new Projectile(dimType);
 		switch (dir) {
 		case 0:
 			e.create(x, y - Entity.size);
@@ -168,6 +221,13 @@ public abstract class Entity {
 		return e;
 	}
 
+	/**
+	 * Detects projectile collision with given specific String code
+	 * @param collision
+	 * @param entities
+	 * @param type
+	 * @return boolean
+	 */
 	protected boolean detectProjectileCollision(CollisionGrid collision,
 			EntityGrid entities, String type) {
 		boolean b = false;
@@ -189,6 +249,13 @@ public abstract class Entity {
 		return b;
 	}
 
+	/**
+	 * Detects collision with other entities
+	 * @param collision
+	 * @param dir
+	 * @param movementSpeed
+	 * @return boolean
+	 */
 	protected boolean detectCollision(CollisionGrid collision, int dir,
 			int movementSpeed) {
 		boolean b = false;
@@ -237,11 +304,22 @@ public abstract class Entity {
 		return b;
 	}
 
+	/**
+	 * Sets the index of the entity according to it's position in the grid
+	 * @param entities
+	 */
 	protected void initializeIndex(EntityGrid entities) {
 		int index = entities.getData().size() - 1;
 		entities.getData().get(index).setIndex(index);
 	}
 	
+	/**
+	 * Changes the graphic of the given entity
+	 * @param dir
+	 * @param spritesheetX
+	 * @param spritesheetY
+	 * @return BufferedImage
+	 */
 	protected BufferedImage animate(int dir, int spritesheetX, int spritesheetY) {
 		int y = spritesheetY;
 		int x = spritesheetX;
@@ -289,8 +367,15 @@ public abstract class Entity {
 		}
 	}
 	
+	/**
+	 * Creates "Scorched Earth" entity which is exclusive to Magmatrum
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @return Flame
+	 */
 	protected Entity generateFlame(int x, int y, int dir) {
-		Flame e = new Flame();
+		Flame e = new Flame(dimType);
 		
 		switch(dir) {
 		case 0:

@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Self explanatory
+ * @author Mustafa Fidan
+ *
+ */
 public class PlayerData {
 	private static int health = 0;
 	

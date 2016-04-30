@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Main Frame for holding all menu operations
+ * @author Mustafa Fidan
+ * 
+ */
 public class MainFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2833419457800312091L;
 	public static JFrame frame;
 	public static JPanel contentPane;
@@ -20,6 +22,7 @@ public class MainFrame extends JFrame {
 	public static BestiaryPanel bestiary;
 	public static OptionsPanel options;
 	public static StartPanel start;
+	public static BestiaryPanel2 bestiary2;
 
 	public static boolean gameStart = false;
 
@@ -28,6 +31,10 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Initializes the main menu frame which contains 5 different buttons.
+	 * @throws IOException
+	 */
 	public MainFrame() throws IOException {
 		setTitle("JCrawl");
 		setResizable(false);
@@ -45,6 +52,7 @@ public class MainFrame extends JFrame {
 		bestiary = new BestiaryPanel();
 		options = new OptionsPanel();
 		start = new StartPanel();
+		bestiary2 = new BestiaryPanel2();
 
 		mainMenuPanel.setVisible(true);
 		creditsPanel.setVisible(false);
@@ -52,6 +60,7 @@ public class MainFrame extends JFrame {
 		bestiary.setVisible(false);
 		options.setVisible(false);
 		start.setVisible(false);
+		bestiary2.setVisible(false);
 
 		setContentPane(contentPane);
 		getContentPane().add(mainMenuPanel);
@@ -60,5 +69,6 @@ public class MainFrame extends JFrame {
 		getContentPane().add(bestiary);
 		getContentPane().add(options);
 		getContentPane().add(start);
+		getContentPane().add(bestiary2);
 	}
 }

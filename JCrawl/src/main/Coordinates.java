@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Data storage class to be used in conjunction with collision grid
+ * @author PARKPC
+ *
+ */
 public class Coordinates {
 	private int x, y;
 	private static int size = 64;

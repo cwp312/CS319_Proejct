@@ -5,13 +5,18 @@ import java.awt.event.KeyListener;
 
 import main.gmm.GameManager;
 
+/**
+ * Input handler class
+ * @author Arda Yucel
+ * @see KeyListener
+ */
 public class InputManager implements KeyListener {
 	/*
 	 * 0 - W 1 - A 2 - S 3 - D
 	 */
 	private boolean keyPressed[] = { false, false, false, false, false, false,
 			false };
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {

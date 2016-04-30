@@ -5,7 +5,20 @@ import java.util.Random;
 import main.CollisionGrid;
 import main.EntityGrid;
 
+/**
+ * The magmatrum
+ * @author Mustafa Fidan
+ *
+ */
 public class Magmatrum extends Enemy {
+
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Magmatrum(int dimType) {
+		super(dimType);
+	}
 
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
@@ -13,6 +26,7 @@ public class Magmatrum extends Enemy {
 		// TODO SpriteSheet support
 		this.graphic = animate(dir, 0, 5);
 		this.movementSpeed = 2;
+		health = 5;
 	}
 
 	
@@ -23,6 +37,10 @@ public class Magmatrum extends Enemy {
 		update(collision, entities, "AI", 0, 5);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see main.gom.Enemy#update(main.CollisionGrid, main.EntityGrid, java.lang.String, int, int)
+	 */
 	@Override
 	protected void update(CollisionGrid collision, EntityGrid entities,
 			String type, int x, int y) {

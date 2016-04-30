@@ -6,11 +6,27 @@ import main.CollisionGrid;
 import main.EntityGrid;
 import main.ExternalData;
 
+/**
+ * Entity manager, handles encapsulating individual entities into single data storage
+ * @author Arda Yucel, Cheol Woo Park, Fatih Tas, Mustafa Fidan
+ *
+ */
 public class EntityManager {
-	EntityGrid entities;
-	private int entityCount = 0;
+	private EntityGrid entities;
+	private int entityCount = 0, dimType = 0;
 	private boolean keySpawned = false;
 	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public EntityManager(int dimType) {
+		this.dimType = dimType;
+	}
+	
+	/*
+	 * To be called in the update method of game manager class
+	 */
 	public EntityGrid update(CollisionGrid collision, boolean[] keyPressed) {
 		entities.getPlayer().update(collision, keyPressed, entities);
 		entityCount = 0;
@@ -23,7 +39,7 @@ public class EntityManager {
 		}
 		
 		if(!keySpawned && (entityCount == 0)) {
-			Entity e = new Key();
+			Entity e = new Key(dimType);
 			e.create(7 * Entity.size, 5 * Entity.size);
 			e.setKey("DO");
 			entities.addData(e);
@@ -31,8 +47,13 @@ public class EntityManager {
 		return entities;
 	}
 	
+	/**
+	 * Initializes the entities grid when the Game Manager is first initialized
+	 * @param data
+	 * @return
+	 */
 	public EntityGrid initializeEntities(ExternalData data) {
-		entities = new EntityGrid();
+		entities = new EntityGrid(dimType);
 		int offset = 1;
 		
 		for(int i = offset; i < data.getTag().size(); i++) {
@@ -61,7 +82,7 @@ public class EntityManager {
 		int xLoc = Integer.parseInt(s.next());
 		int yLoc = Integer.parseInt(s.next());
 		
-		Player p = new Player();
+		Player p = new Player(dimType);
 		p.create(xLoc * Entity.size, yLoc * Entity.size);
 		
 		entities.setPlayer(p);
@@ -82,19 +103,19 @@ public class EntityManager {
 		
 		switch(type) {
 		case "slime":
-			e = new Slime();
+			e = new Slime(dimType);
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		case "orc":
-			e = new Orc();
+			e = new Orc(dimType);
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		case "magmatrum":
-			e = new Magmatrum();
+			e = new Magmatrum(dimType);
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		case "wolf":
-			e = new Wolf();
+			e = new Wolf(dimType);
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			break;
 		}
@@ -119,7 +140,7 @@ public class EntityManager {
 		
 		switch(type) {
 		case "archer":
-			e = new Archer();
+			e = new Archer(dimType);
 			e.create(xLoc * Entity.size, yLoc * Entity.size);
 			e.setDir(Integer.parseInt(s.next()));
 			break;
@@ -145,7 +166,7 @@ public class EntityManager {
 		
 		switch(type) {
 		case "goblin":
-			e = new Goblin();
+			e = new Goblin(dimType);
 			int x1 = Integer.parseInt(s.next());
 			int y1 = Integer.parseInt(s.next());
 			e.setDestination(x1 * Entity.size, y1 * Entity.size);

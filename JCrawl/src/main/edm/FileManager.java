@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 import main.ExternalData;
 
+/**
+ * Lexer/Parser for the level.txt files
+ * @author Fatih Tas
+ *
+ */
 public class FileManager {
 	private Scanner file;
 	private Scanner parser;
@@ -14,6 +19,7 @@ public class FileManager {
 
 	private boolean player = false, entity_AI = false, entity_st = false, entity_pt = false;
 	private int dataPassCounter = 0, dataIndice = 0;
+	private static int levelCount = 0;
 
 	/**
 	 * Retrieves the file mentioned by the URL
@@ -40,6 +46,7 @@ public class FileManager {
 		
 		boolean levelFlag = false;
 		boolean entityFlag = false;
+		boolean countFlag = false;
 		while (file.hasNextLine()) {
 			String line = file.nextLine();
 			if (!line.isEmpty()) {
@@ -52,9 +59,15 @@ public class FileManager {
 				if (newLine.equals("[layout]")) {
 					levelFlag = true;
 					entityFlag = false;
+					countFlag = false;
 				} else if (newLine.equals("[entity]")) {
 					levelFlag = false;
 					entityFlag = true;
+					countFlag = false;
+				} else if (newLine.equals("[levelCount]")) {
+					levelFlag = false;
+					entityFlag = false;
+					countFlag = true;
 				} else {
 					if (levelFlag) {
 						parseLevel(newLine);
@@ -62,9 +75,14 @@ public class FileManager {
 					if (entityFlag) {
 						parseEntity(newLine);
 					}
+					if (countFlag) {
+						setLevelCount(Integer.parseInt(newLine));
+						countFlag = false;
+					}
 				}
 			}
 		}
+		System.out.println(levelCount);
 
 		return data;
 	}
@@ -213,5 +231,13 @@ public class FileManager {
 		temp = temp + "," + line;
 		data.getData().set(dataIndice, temp);
 		dataPassCounter++;
+	}
+
+	public static int getLevelCount() {
+		return levelCount;
+	}
+
+	public static void setLevelCount(int levelCount) {
+		FileManager.levelCount = levelCount;
 	}
 }

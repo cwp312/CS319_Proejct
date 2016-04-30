@@ -5,14 +5,40 @@ import java.util.Random;
 import main.CollisionGrid;
 import main.EntityGrid;
 
+/**
+ * Super class for all hostile entities
+ * @author Arda Yucel, Cheol Woo Park, Fatih Tas, Mustafa Fidan
+ *
+ */
 public abstract class Enemy extends Entity {
+	
 	protected int health = 2, movementSpeed = 0, counter = 0, rem = 0;
 	protected boolean moveComplete = true, buffer = false;
 
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Enemy(int dimType) {
+		super(dimType);
+	}
+	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	protected boolean detectPlayerCollision() {
 		return false;
 	}
 
+	/**
+	 * Called by the update method of abstract update method
+	 * @param collision
+	 * @param entities
+	 * @param type
+	 * @param x
+	 * @param y
+	 */
 	protected void update(CollisionGrid collision, EntityGrid entities,
 			String type, int x, int y) {
 		if (type.equals("AI")) {

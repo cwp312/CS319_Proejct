@@ -5,10 +5,19 @@ import java.util.ArrayList;
 import main.gom.Entity;
 import main.gom.Player;
 
+/**
+ * Data storage class for Entities
+ * @author Cheol Woo Park
+ *
+ */
 public class EntityGrid {
-	private Player p = new Player();
+	private Player p;
 	private ArrayList<Entity> data = new ArrayList<Entity>();
-
+	
+	public EntityGrid(int dimType) {
+		p = new Player(dimType);
+	}
+	
 	public ArrayList<Entity> getData() {
 		return data;
 	}

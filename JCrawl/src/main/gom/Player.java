@@ -1,10 +1,22 @@
 package main.gom;
 
 import main.CollisionGrid;
-import main.Debug;
 import main.EntityGrid;
 
+/**
+ * The one and only player
+ * @author Cheol Woo Park
+ *
+ */
 public class Player extends Entity {
+
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Player(int dimType) {
+		super(dimType);
+	}
 
 	private int movementSpeed = 8, attackSpeed = 10,
 			energy = 0, dir = 0, buffer = 0;
@@ -18,7 +30,7 @@ public class Player extends Entity {
 		this.yLoc = yLoc;
 		// TODO SpriteSheet support
 		this.graphic = animate(dir, 0, 0);
-		health = 10;
+		health = 8;
 		indice = -1;
 	}
 
@@ -27,13 +39,13 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * 
+	 * Unlike other entities, requires an array of booleans
 	 * @param collision
 	 * @param keyPressed
 	 */
 	public void update(CollisionGrid collision, boolean[] keyPressed,
 			EntityGrid entities) {
-		if(buffer < 48) {
+		if(buffer < 24) {
 			buffer++;
 		}
 		
@@ -75,23 +87,21 @@ public class Player extends Entity {
 			}
 		}
 		
-		if(detectCollision(collision, dir, movementSpeed) && buffer == 48) {
+		if(detectCollision(collision, dir, movementSpeed) && buffer == 24) {
 			health--;
 			buffer = 0;
-			Debug.output("Player", health);
 		}
 		
-		if(detectProjectileCollision(collision, entities, "projectile") && buffer == 48) {
+		if(detectProjectileCollision(collision, entities, "projectile") && buffer == 24) {
 			health--;
 			buffer = 0;
-			Debug.output("Player", health);
-		}
-		
-		if(health < 1) {
-			// TODO gameover
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see main.gom.Entity#update(main.CollisionGrid, main.EntityGrid)
+	 */
 	public void update(CollisionGrid collision, EntityGrid entities) {
 	}
 	

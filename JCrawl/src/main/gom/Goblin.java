@@ -3,10 +3,24 @@ package main.gom;
 import main.CollisionGrid;
 import main.EntityGrid;
 
+/**
+ * The goblin
+ * @author Fatih Tas
+ *
+ */
 public class Goblin extends Enemy {
+	
 	private int movementSpeed = 2, counter = 0;
 	private int routeLength;
 	private boolean moveComplete = false;
+	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Goblin(int dimType) {
+		super(dimType);
+	}
 	
 	@Override
 	public void create(int xLoc, int yLoc) {
@@ -14,6 +28,7 @@ public class Goblin extends Enemy {
 		this.yLoc = yLoc;
 		// TODO SpriteSheet support
 		this.graphic = animate(dir, 0, 4);
+		health = 3;
 		if(this.xLoc == getX1()) {
 			if(yLoc > getY1()) {
 				dir = 0;

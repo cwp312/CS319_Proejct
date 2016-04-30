@@ -7,7 +7,20 @@ import main.EntityGrid;
 import main.ImageLoader;
 import main.SpriteSheet;
 
+/**
+ * Dependent Object super class
+ * @author Arda Yucel
+ *
+ */
 public abstract class DependentObject extends Entity {
+
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public DependentObject(int dimType) {
+		super(dimType);
+	}
 
 	public void destroy(EntityGrid entities) {
 		entities.destroy(indice);
@@ -21,12 +34,23 @@ public abstract class DependentObject extends Entity {
 		}
 	}
 	
+	/**
+	 * The behavior of the object will be defined by overriding this method
+	 * @param entities
+	 */
 	protected abstract void performBehavior(EntityGrid entities);
 	
 	protected BufferedImage initGraphics(int x, int y) {
 		return new SpriteSheet(new ImageLoader().load("objects")).crop(x, y);
 	}
 	
+	/**
+	 * Detects only player collision
+	 * @param collision
+	 * @param dir
+	 * @param movementSpeed
+	 * @return boolean
+	 */
 	protected boolean detectPlayerCollision(CollisionGrid collision, int dir,
 			int movementSpeed) {
 		boolean b = false;

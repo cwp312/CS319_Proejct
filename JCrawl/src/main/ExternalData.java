@@ -2,6 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
+/**
+ * Data storage class for the external data parsed by the ExternalDataManager class
+ * @author Fatih Tas
+ *
+ */
 public class ExternalData {
 	private ArrayList<String> tag, data;
 	

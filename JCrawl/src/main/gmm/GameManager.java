@@ -11,25 +11,40 @@ import main.gom.EntityManager;
 import main.lm.LevelManager;
 import main.rsystem.Platform;
 
+/**
+ * Control class for all other sub control classes
+ * 
+ * @author Cheol Woo Park
+ *
+ */
 public class GameManager {
 
 	private GraphicGrid gfx;
 	private EntityGrid entities;
 	private CollisionGrid collision;
 	private ExternalData data;
-	private GraphicsAssembler ga = new GraphicsAssembler();
+	private GraphicsAssembler ga;
 
-	private static boolean levelChanged = false;
+	private static boolean levelChanged = false, win = false;
 	private static boolean keyPressed[] = { false, false, false, false, false,
 			false, false };
-	private int curLevel = 0;
+	private static int curLevel = 0;
 
 	private FileManager file = new FileManager();
-	private LevelManager level = new LevelManager();
-	private EntityManager entity = new EntityManager();
-	private CollisionManager collisionM = new CollisionManager();
+	private LevelManager level;
+	private EntityManager entity;
+	private CollisionManager collisionM;
 
-	public GameManager() {
+	/**
+	 * Initializes all other sub managers associated
+	 * 
+	 * @param dimType
+	 */
+	public GameManager(int dimType) {
+		entity = new EntityManager(dimType);
+		level = new LevelManager(dimType);
+		ga = new GraphicsAssembler(dimType);
+		collisionM = new CollisionManager(dimType);
 		initialize("level.txt");
 	}
 
@@ -44,42 +59,55 @@ public class GameManager {
 			collision = collisionM.update(entities, gfx);
 			entity.update(collision, keyPressed);
 		}
-		if(levelChanged) {
+		
+		if (levelChanged) {
 			curLevel++;
 			initialize("level" + curLevel + ".txt");
 			levelChanged = false;
 		}
 	}
-	
+
 	/*
-	 * Compile the data it holds into actual graphical data through GraphicsAssembler
+	 * Compile the data it holds into actual graphical data through
+	 * GraphicsAssembler
 	 */
 	public RenderData render() {
 		return ga.render(gfx, entities);
 	}
 
 	// Initialization methods
-	public void initializeLevel() {
+	private void initializeLevel() {
 		gfx = level.initializeLevel(data);
 	}
 
-	public void initializeEntities() {
+	private void initializeEntities() {
 		entities = entity.initializeEntities(data);
 	}
 
-	public void initializeCollision() {
+	private void initializeCollision() {
 		collision = collisionM.initializeCollision(entities, gfx);
 	}
+
 	//
 
+	/**
+	 * Called extensively by InputManager class.
+	 * 
+	 * @param keyPressed
+	 */
 	public static void setKeyPressed(boolean[] keyPressed) {
 		GameManager.keyPressed = keyPressed;
 	}
 
+	/**
+	 * Changes flag levelChanged
+	 * 
+	 * @param levelChanged
+	 */
 	public static void setLevelChanged(boolean levelChanged) {
 		GameManager.levelChanged = levelChanged;
 	}
-	
+
 	private void initialize(String level) {
 		file.getFile("res/" + level);
 		data = file.parseFile();
@@ -87,5 +115,17 @@ public class GameManager {
 		initializeLevel();
 		initializeEntities();
 		initializeCollision();
+	}
+
+	public static boolean isWin() {
+		return win;
+	}
+
+	public static void setWin(boolean win) {
+		GameManager.win = win;
+	}
+	
+	public static int getCurLevel() {
+		return curLevel;
 	}
 }

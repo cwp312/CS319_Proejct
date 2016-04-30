@@ -7,20 +7,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 public class CreditsPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 674421160023666790L;
 	
 	JLabel mainBackground;
 	static JButton backButton;
 	JLabel labelCredits ,labelArda, labelCW, labelFatih, labelMustafa;
 	
+	/**
+	 * This panel prints the credits on the frame
+	 */
 	public CreditsPanel(){
 		
 		// Panel Properties
@@ -36,7 +35,7 @@ public class CreditsPanel extends JPanel {
 		add(labelCredits);
 		
 		// Name Label
-		labelArda = new JLabel("Arda Y?cel");
+		labelArda = new JLabel("Arda Yucel");
 		labelArda.setHorizontalAlignment(SwingConstants.CENTER);
 		labelArda.setForeground(new Color(0, 0, 0));
 		labelArda.setFont(new Font("Chalkduster", Font.BOLD, 32));
@@ -52,7 +51,7 @@ public class CreditsPanel extends JPanel {
 		add(labelCW);
 		
 		// Name Label
-		labelFatih = new JLabel("Fatih Ta? ");
+		labelFatih = new JLabel("Fatih Tas");
 		labelFatih.setHorizontalAlignment(SwingConstants.CENTER);
 		labelFatih.setForeground(new Color(0, 0, 0));
 		labelFatih.setFont(new Font("Chalkduster", Font.BOLD, 32));

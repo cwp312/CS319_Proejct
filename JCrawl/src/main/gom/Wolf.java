@@ -3,7 +3,20 @@ package main.gom;
 import main.CollisionGrid;
 import main.EntityGrid;
 
+/**
+ * The wolf
+ * @author Mustafa Fidan
+ *
+ */
 public class Wolf extends Enemy {
+	
+	/**
+	 * Initialization for the dimension type
+	 * @param dimType
+	 */
+	public Wolf(int dimType) {
+		super(dimType);
+	}
 
 	public void create(int xLoc, int yLoc) {
 		this.xLoc = xLoc;
@@ -11,6 +24,7 @@ public class Wolf extends Enemy {
 		// TODO SpriteSheet support
 		this.graphic = animate(dir, 0, 2);
 		this.movementSpeed = 4;
+		health = 2;
 	}
 
 	public void destroy(EntityGrid entities) {
