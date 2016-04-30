@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>JCrawl</title>
-
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -54,16 +54,24 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">About</a>
+                        <a href="#about">What is JCrawl?</a>
                     </li>
-                     <li class="page-scroll">
-                        <a href="#reports">Reports</a>
+                    <li class="page-scroll">
+                        <a href="#jldl">JLDL</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#contributors">Contributors</a>
                     </li>
                     <li class="page-scroll">
-                        <a class="not-active" href="#">Download Game</a>
+                        <a href="#reports">Reports</a>
+                    </li>
+
+                    <li class="page-scroll">
+                        <a href="doc/index.html" target="_blank">API Documentation</a>
+                    </li>
+
+                    <li class="page-scroll">
+                        <a href="#downloadModal" href="#" data-toggle="modal">Downloads</a>
                     </li>
                 </ul>
             </div>
@@ -99,11 +107,51 @@
                </div>
                <div class="row">
                    <div class="col-md-8 col-md-offset-2">
-                       <p>JCrawl is a purely Java based top down adventure game. The player controls a single character with variety of skills to explore myriad of rooms filled with dangers, loot and puzzles. The players will be able to move freely in all directions, but shoot at the direction they are looking at only initially. There will be many kind of items which will further enhance player's capabilities (Temporary power ups/ Permanent upgrades). Some enemies will be stationary, some enemies will have hard coded behavior, some enemies will have independent basic AI. There will be two types of objects: Independent/Dependent; Independent objects (eg. Fire traps, Automatic doors) will perform their intended behavior regardless of whether the player input is present or not. Dependent objects (eg. Light switch, Doors) will perform their intended behavior IF it receives a player input.</p>
+                       <p>JCrawl is a top down 2d adventure game, with the emphasis placed on extendibility and user level design. The aim of the game is to complete all levels by defeating every other monsters existing in the level.</p>
                    </div>
                </div>
            </div>
        </section>
+       <section  id="jldl" class="success">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-12 text-center">
+                          <h2>JLDL</h2>
+                          <hr class="star-light">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-8 col-md-offset-2 text-center">
+                          <p>JLDL stands for <strong>J</strong>Crawl <strong>L</strong>evel <strong>D</strong>esign <strong>L</strong>anguage. </p>
+                          <p> It provides the user the ability to create, edit existing levels to extend their gameplay experience.</p>
+
+                          <a href="#jldlModal" class="icon-button" data-toggle="modal"><h3>Tutorial</h3><i class="fa fa-question-circle fa-3x"></i></a>
+                      </div>
+                  </div>
+              </div>
+        </section>
+.
+    <!-- contributors Section -->
+    <section id="contributors">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Contributors</h2>
+                    <hr class="star-primary">
+                    <h3>Group 6</h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p>Arda Yücel</p>
+                    <p>Cheol Woo Park</p>
+                    <p>Fatih Taş</p>
+                    <p>Mustafa Fidan</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Reports Grid Section -->
     <section id="reports" class="success">
@@ -140,7 +188,7 @@
                     </a>
                 </div>
                 <div class="col-sm-4 reports-item">
-                    <a target="_blank" href="#" class="reports-link" data-toggle="modal">
+                    <a target="_blank" href="https://github.com/cwp312/JCrawl/raw/master/Final%20Report.docx" class="reports-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-download fa-3x"></i>
@@ -154,29 +202,6 @@
             </div>
         </div>
     </section>
-.
-    <!-- contributors Section -->
-    <section id="contributors">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contributors</h2>
-                    <hr class="star-primary">
-                    <h3>Group 6</h3>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p>Arda Yücel</p>
-                    <p>Cheol Woo Park</p>
-                    <p>Fatih Taş</p>
-                    <p>Mustafa Fidan</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
@@ -207,7 +232,154 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
+    <!-- Download Modal -->
+    <div class="reports-modal modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Downloads</h2>
+                            <hr class="star-primary">
+                            <h3>Download executable</h3>
+                            <h4>Installation Guide</h4>
+                            <ol>
+                                <li>Extract the archive.</li>
+                                <li>Run JCrawl.jar</li>
+                            </ol>
+                            <a href="https://github.com/cwp312/JCrawl/raw/master/Game.zip"><h3>Download</h3></a>
+                            <hr>
+                            <a href="https://github.com/cwp312/JCrawl/raw/master/JCrawl.zip"><h3>Download Source Code</h3></a>
 
+                            <hr>
+                            <a target="_blank" href="https://github.com/cwp312/JCrawl/tree/master/JCrawl"><h3>View Source Code on GitHub</h3><i class="fa fa-3x fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JLDL Modal -->
+    <div class="reports-modal modal fade " id="jldlModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>JCrawl Level Design Language</h2>
+                            <hr class="star-primary">
+                            <ul>
+
+                            <p>
+                                JCrawl provides the user the ability to create, edit existing levels to extend their gameplay experience.
+                            </p>
+                            <hr>
+                            <p>
+                                Inside the res folder which was unzipped with the JCrawl.jar, you will find multiple text files. By editing the text files you will be able to edit the levels.
+                            </p>
+                            <hr>
+                            <p>
+                                Levels are parsed in this order
+                            </p>
+                            <p>
+                                level.txt -> level1.txt -> level2.txt -> ….
+                            </p>
+                            <hr>
+                            <p>
+                                The first level is always just plain level.txt file.
+                            </p>
+                            <hr>
+                            <p>
+                                level.txt file should include the level count which specifies the number of levels player needs the pass to win the game. The other levels don’t need to include this information.
+                            </p>
+                            <hr>
+                            </ul>
+                            <h3>Example level.txt</h3>
+                            <pre>
+[levelCount]
+1
+[layout]
+
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+[entity]
+p_,7,5
+AI,magmatrum,2,2
+AI,wolf,4,4
+stationary,archer,10,4,2
+                            </pre>
+                            <p>
+                                Output of this file looks like this.
+                            </p>
+                            <img src="img/jldl/examplelevel.jpg" class="img-responsive"></img>
+                            <hr>
+                            <h3>Level Definition</h3>
+                            <h4>Sample</h4>
+                            <pre>0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0</pre>
+                            <p>This will create a row of tiles where there will be a wall on the ends and rest will be empty.</p>
+                            <p>0 – Wall</p>
+                            <p>1 – Walkable</p>
+                            <hr>
+                            <h3>Entity Definition</h3>
+                            <h4>Player</h4>
+                            <p>
+                                The very first definition must be a player. This is the format:
+                            </p>
+                            <pre>p_,x,y</pre>
+                            <p>Where x is the position in the x axis and the y is the position in the y axis.</p>
+
+                            <h4>AI</h4>
+
+                            <pre>AI,type,x,y</pre>
+                            <p>This code will generate randomly roaming creature types at the coordinate (x,y) which is of <strong>type</strong></p>
+                            <p>Here are the list of valid AI types:</p>
+                            <ol>
+                                <li>slime</li>
+                                <li>wolf</li>
+                                <li>orc</li>
+                                <li>magmatrum</li>
+                            </ol>
+
+                            <h4>Stationary</h4>
+                            <pre>stationary,type,x,y,dir</pre>
+                            <p>This code will generate stationary creature looking at defined direction dir at coordinate (x,y) which is of type  <strong>type</strong>.</p>
+                            <p>Only stationary creature type is <strong>archer</strong> for this version.</p>
+
+                            <h4>Patrol</h4>
+                            <pre>patrol,type,x,y,x_t,y_t</pre>
+                            <p>This code will generate patrolling creature, using the path made by x,y and x_t,y_t with type  <strong>type</strong>.</p>
+                            <p><strong>Disclaimer:</strong>The pathing only supports straight path, so either <strong>x</strong> and <strong>x_t</strong> or <strong>y</strong> and <strong>y_t MUST BE EQUAL.</strong></p>
+                            <p>Only patrolling creature type is <strong>goblin</strong> for this version.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

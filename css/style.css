@@ -24,11 +24,7 @@ a.active {
     outline: 0;
     color: #18bc9c;
 }
-a.not-active {
-   pointer-events: none;
-   cursor: default;
-   color: #888 !important;
-}
+
 
 h1,
 h2,
@@ -186,7 +182,7 @@ section h2 {
 
 section.success {
     color: #fff;
-    background: #18bc9c;
+    background: #18bb9c;
 }
 
 section.success a,
@@ -362,7 +358,7 @@ section.success a.active {
 }
 
 .floating-label-form-group-with-focus label {
-    color: #18bc9c;
+    color: #18bb9c;
 }
 
 form .row:first-child .floating-label-form-group {
@@ -390,7 +386,20 @@ footer .footer-below {
     padding: 25px 0;
     background-color: #233140;
 }
-
+.icon-button{
+    color: #fff !important;
+    -webkit-transition: color 0.8s  ease;
+    -moz-transition: color 0.8s ease;
+    -ms-transition: color 0.8s  ease;
+    transition: color 0.8s ease;
+}
+.icon-button:hover{
+    color: #122130 !important;
+    -webkit-transition: color 0.8s  ease;
+    -moz-transition: color 0.8s ease;
+    -ms-transition: color 0.8s  ease;
+    transition: color 0.8s ease;
+}
 .btn-social {
     display: inline-block;
     width: 50px;
@@ -453,7 +462,7 @@ footer .footer-below {
 }
 
 .reports-modal .close-modal {
-    position: absolute;
+    position: fixed;
     top: 25px;
     right: 25px;
     width: 75px;
@@ -468,7 +477,7 @@ footer .footer-below {
 
 .reports-modal .close-modal .lr {
     z-index: 1051;
-    width: 1px;
+    width: 3px;
     height: 75px;
     margin-left: 35px;
     background-color: #2c3e50;
@@ -479,7 +488,7 @@ footer .footer-below {
 
 .reports-modal .close-modal .lr .rl {
     z-index: 1052;
-    width: 1px;
+    width: 3px;
     height: 75px;
     background-color: #2c3e50;
     -webkit-transform: rotate(90deg);
@@ -492,6 +501,20 @@ footer .footer-below {
     opacity: 0;
 }
 
+.modal-body ol{
+    text-align: left;
+    font-size: 20px;
+}
+.modal-body p{
+    text-align: left;
+}
+.modal-body h3, .modal-body h4{
+    line-height: 2em;
+}
 .header-img{
     width:30%;
+}
+
+.modal-body pre{
+    text-align: left;
 }
